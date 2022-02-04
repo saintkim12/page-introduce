@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:push": "vue-tsc --noEmit && vite build && cd ./.docs && git add . && git commit -m \"build test\" && git push origin docs && cd -",
     "preview": "vite preview"
   },
   "dependencies": {

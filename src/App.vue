@@ -21,7 +21,8 @@ const onSlideChange = () => {
 };
 // const modules = [Navigation, Pagination, Scrollbar, A11y]
 const swiperProps = {
-  // direction: 'vertical',
+  // direction: 'vertical' as const, // https://stackoverflow.com/a/55387357
+  direction: <const> 'vertical',
   mousewheel: true,
   keyboard: true,
   pagination: { clickable: true },
@@ -30,22 +31,33 @@ const swiperProps = {
   onSwiper,
   onSlideChange,
 }
+
+const slides: string[] = [
+  /* html */`
+    <div>
+      Hello! I'm @saintkim12.<br>
+      I'm Web Developer.
+    </div>
+  `,
+  'Slide_2',
+  'Slide_3',
+  'Slide_4',
+  'Slide_5',
+  'Slide_6',
+  'Slide_7',
+  'Slide_8',
+  'Slide_9',
+]
 </script>
 
 <template>
+    <!-- direction="vertical" -->
   <swiper
-    direction="vertical"
     v-bind="swiperProps"
   >
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide>
-    <swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide>
-    <swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide>
-    <swiper-slide>Slide 9</swiper-slide>
+      <!-- {{ text }} -->
+    <swiper-slide v-for="(html, idx) in slides" :key="idx" v-html="html">
+    </swiper-slide>
   </swiper>
 </template>
 
