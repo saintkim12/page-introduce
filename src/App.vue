@@ -3,35 +3,39 @@
 // Import Swiper styles
 import 'swiper/css';
 // import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
 
 // import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Mousewheel, Keyboard, Scrollbar } from 'swiper';
+import { Mousewheel, Keyboard, Pagination, Scrollbar } from 'swiper';
 // Import Swiper Vue.js components
+import { Swiper as SwiperClass } from 'swiper/types';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
-const onSwiper = (swiper: any) => {
+const onSwiper = (swiper: SwiperClass) => {
+// const onSwiper = (swiper: any) => {
   console.log(swiper);
 };
 const onSlideChange = () => {
   console.log('slide change');
 };
 // const modules = [Navigation, Pagination, Scrollbar, A11y]
-const modules = [Mousewheel, Keyboard, Scrollbar]
+const swiperProps = {
+  // direction: 'vertical',
+  mousewheel: true,
+  keyboard: true,
+  pagination: { clickable: true },
+  // scrollbar: { hide: true },
+  modules: [Mousewheel, Keyboard, Pagination, Scrollbar],
+  onSwiper,
+  onSlideChange,
+}
 </script>
 
 <template>
-    <!-- :navigation="true" -->
-    <!-- :pagination="true" -->
   <swiper
-    :direction="'vertical'"
-    :scrollbar="true"
-    :mousewheel="true"
-    :keyboard="true"
-    :modules="modules"
-    class="mySwiper"
-    v-bind="{ onSwiper, onSlideChange }"
+    direction="vertical"
+    v-bind="swiperProps"
   >
     <swiper-slide>Slide 1</swiper-slide>
     <swiper-slide>Slide 2</swiper-slide>
